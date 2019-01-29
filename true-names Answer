@@ -1,0 +1,10 @@
+# Basic syntax and strings
+# Defend against "Brak" and "Treg"!
+# You must attack small ogres twice.
+
+hero.moveRight()
+hero.moveUp()
+hero.attack("Brak")
+hero.attack("Brak")
+hero.attack("Treg")
+hero.attack("Treg")

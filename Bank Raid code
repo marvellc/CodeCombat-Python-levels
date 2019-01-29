@@ -1,4 +1,5 @@
 # Written to solve the "Bank Raid" level on CodeCombat.
+# Areas covered: Array Length, Accessing Properties, Variables, While Loops, Iterating Over Arrays, While Loops with Conditionals.
 # Objective: Wait for ogres, defeat them and collect gold.
 while True:
     enemies = hero.findEnemies()

@@ -1,0 +1,14 @@
+# Munchkins are attacking!
+# The swarms will come at regular intervals.
+# Whenever you can, cleave to clear the mass of enemies.
+
+while True:
+    enemy = hero.findNearestEnemy()
+    # Use an if-statement with isReady to check "cleave":
+    if enemy:
+        cleave = hero.isReady("cleave")
+        if cleave:
+            hero.cleave(enemy)
+        else:
+            hero.attack(enemy)
+            hero.attack(enemy)

@@ -1,0 +1,10 @@
+# Stay alive longer than the enemy hero!
+while True:
+    # Devise your own strategy. Be creative!
+    enemy = hero.findNearestEnemy()
+    if enemy:
+        if hero.isReady("cleave"):
+            hero.cleave(enemy)
+        else:
+            hero.attack(enemy)
+    

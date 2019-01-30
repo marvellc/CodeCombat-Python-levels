@@ -1,0 +1,21 @@
+# Stay alive for one minute.
+# If you win, it gets harder (and more rewarding).
+# If you lose, you must wait a day before you can resubmit.
+# Remember, each submission gets a new random seed.
+def search(enemy):
+    enemies = hero.findEnemies()
+    if enemy.type == "thrower":
+        hero.jumpTo(enemy)
+        cleave = hero.isReady("cleave")
+        if cleave:
+            hero.cleave(enemy)
+        else:
+            hero.attack(enemy)
+            
+while True:
+    enemy = hero.findNearestEnemy()
+    if enemy:
+        search(enemy)
+    elif distance > 10:
+        hero.shield()
+        pass

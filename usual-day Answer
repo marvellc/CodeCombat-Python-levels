@@ -1,0 +1,10 @@
+while True:
+    enemy = hero.findNearestEnemy()
+    if enemy and enemy.type == "munchkin":
+        hero.attack(enemy)
+    # Find the nearest item.
+    item = hero.findNearestItem()
+        # Collect item if it exists and its type is "coin".
+    if item and item.type == "coin":
+        hero.move(item.pos)
+        

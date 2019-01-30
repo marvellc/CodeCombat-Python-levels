@@ -1,0 +1,19 @@
+# Ask the healer for help when you're under one-half health.
+
+while True:
+    currentHealth = hero.health
+    healingThreshold = hero.maxHealth / 2
+    enemy = hero.findNearestEnemy()
+    # If your current health is less than the threshold,
+    # move to the healing point and say, "heal me".
+    # Otherwise, attack. You'll need to fight hard!
+    if healingThreshold >= currentHealth:
+        hero.moveXY(66, 46)
+        hero.say("heal me")
+    elif enemy:
+        if hero.isReady("cleave"):
+            hero.cleave(enemy)
+        else:
+            hero.attack(enemy)
+    pass
+

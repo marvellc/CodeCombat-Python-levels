@@ -1,0 +1,23 @@
+# Attack when your soldiers' total health is greater
+# than the ogres' total health
+
+# This function return the sum of all the units' health.
+def sumHealth(units):
+    totalHealth = 0
+    unitIndex = 0
+    # Complete this function:
+    while unitIndex < len(units):
+        unit = units[unitIndex]
+        totalHealth += unit.health
+        unitIndex += 1
+    return totalHealth
+
+while True:
+    friends = hero.findFriends()
+    enemies = hero.findEnemies()
+    # Get the total health of your soldiers and the ogres.
+    if sumHealth(friends) <= sumHealth(enemies):
+        hero.say("Wait")
+    # Say "Attack" when your side has more total health.
+    else:
+        hero.say("ATTACK!!!")

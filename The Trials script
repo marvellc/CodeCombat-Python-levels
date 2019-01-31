@@ -1,0 +1,93 @@
+# This level is intended to be for advanced players. The solution should be pretty complex with a lot of moving parts. It might also be a bit of a gear check unless you use creative methods.
+# You need to make your way to the first trial (Oasis of Marr) defeating enemies along the way. When you reach it, pick all the mushrooms to trigger the trial to begin. If you survive the onslaught, make your way to the next Oasis for the second trial, then the Temple. When all trials are complete you will have to face the final boss. Good luck!
+# HINT: Glasses with a high visual range help tremendously on this level so buy the best you can get.
+# HINT: the unit 'type' for the oasis guardians is 'oasis-guardian'
+def attack(enemy):
+    while enemy.health > 0:
+        hero.attack(enemy)
+    pass
+def Hunt(enemy):
+    enemy = hero.findNearestEnemy()
+    if enemy and enemy.type == "shaman":
+        attack(enemy)
+    elif enemy and enemy.type == "thrower":
+        hero.moveXY(enemy.pos.x,enemy.pos.y)
+        hero.attack(enemy)
+    elif enemy and enemy.type == "oasis-guardian":
+        attack(enemy)
+        OGdead += 1
+    elif enemy:
+        attack(enemy)
+    else:
+        hero.wait(3)
+    pass
+OGdead = 0
+trial = 1
+while trial < 5:
+    enemy = hero.findNearestEnemy()
+    if enemy:
+        while enemy:
+            attack(enemy)
+            break
+    elif trial == 1:
+        #At First trial and now collect mushrooms and kill the guardian
+        items = hero.findNearestItem()
+        if items:
+            hero.move(items.pos)
+        else:
+            hero.moveXY(112, 28)
+            hero.wait(5)
+            while OGdead == 0:
+                Hunt()
+            trial += 1
+            #hero.moveXY(16, 116)
+            pass
+        pass
+    elif trial == 2:
+        #CP1 = (17, 116)
+        #CP2 = (110, 119)
+        #rinse and repeat
+        hero.moveXY(16, 116)
+        items = hero.findNearestItem()
+        if items:
+            hero.moveXY(items.pos.x,items.pos.y)
+        else:
+            hero.moveXY(17, 116)
+            hero.wait(5)
+            while OGdead == 1:
+                Hunt()
+            trial += 1
+            #hero.moveXY(16, 116)
+            pass
+        pass
+    elif trial == 3:
+        #CP1 = (114, 118)
+        #CP2 = (73, 69)
+        #rinse and repeat
+        hero.moveXY(114, 118)
+        items = hero.findNearestItem()
+        if items:
+            hero.moveXY(items.pos.x,items.pos.y)
+        else:
+            hero.moveXY(114, 118)
+            hero.wait(5)
+            while OGdead == 2:
+                Hunt()
+            enemy = hero.findNearestEnemy()
+            attack(enemy)
+            trial += 1
+            hero.moveXY(78,70)
+            pass
+        pass
+    elif trial == 4:
+        hero.moveXY(126, 77)
+        #final boss
+        enemy = hero.findNearestEnemy()
+        if enemy:
+            while enemy:
+                attack(enemy)
+                break
+        else:
+            hero.moveXY(78, 70)
+            hero.findNearestEnemy()
+        trial +=1

@@ -29,11 +29,11 @@ while True:
         # If goldAmount is less than requiredGold
         if goldAmount < requiredGold:
             # Then say "Non satis".
-            hero.say(less)
+            hero.say(more)
         # If goldAmount is greater than requiredGold
         elif goldAmount > requiredGold:
             # Then say "Nimis".
-            hero.say(more)
+            hero.say(less)
         # If goldAmount is exactly equal to requiredGold
         elif goldAmount == requiredGold:
             # Then collect all coins:

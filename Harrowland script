@@ -1,0 +1,21 @@
+# Use your cleverest programming tricks to outwit and overpower your opponent!
+def attack(enemy):
+    if enemy and enemy.type == "archer":
+        while enemy.health >0:
+            hero.attack(enemy)
+            break
+    elif enemy and enemy.type == "soldier":
+        while enemy.health >0:
+            hero.attack(enemy)
+            break
+    elif enemy and enemy.type != "sand-yak":
+        while enemy.health >0:
+            hero.attack(enemy)
+            break
+        
+while True:
+    enemy = hero.findNearestEnemy()
+    if enemy:
+        attack(enemy)
+    else:
+        break

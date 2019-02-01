@@ -1,0 +1,37 @@
+while True:
+    if hero.health < hero.maxHealth /2:
+        hero.moveXY(24, 47)
+        return
+    Badniks = hero.findEnemies()
+    EggPawns = hero.findByType("archer", Badniks)
+    Friends = hero.findFriends()
+    RobotIndex = 0
+    while RobotIndex < len(EggPawns):
+        Badnik = EggPawns[RobotIndex]
+        if hero.distanceTo(Badnik) < 37:
+            while Badnik.health > 0:
+                if hero.isReady("bash"):
+                    hero.bash(Badnik)
+                else:
+                    hero.attack(Badnik)
+        RobotIndex += 1
+    RobotIndex = 0
+    while RobotIndex < len(Badniks):
+        Badnik = Badniks[RobotIndex]
+        if Badnik.type != "sand-yak" and hero.distanceTo(Badnik) < 37:
+            if not hero.health < 10:
+                while Badnik.health > 0:
+                    if hero.isReady("bash"):
+                        hero.bash(Badnik)
+                    else:
+                        hero.attack(Badnik)
+            elif len(Friends) > 6:
+                hero.shield()
+            else:
+                while Badnik.health > 0:
+                    if hero.isReady("bash"):
+                        hero.bash(Badnik)
+                    else:
+                        hero.attack(Badnik)
+        
+        RobotIndex += 1

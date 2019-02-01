@@ -1,0 +1,40 @@
+# Gather coins to summon soldiers and have them attack the enemy.
+def findbestcoins(items):
+    itemIndex = 0
+    bestValue = 0
+    bestItem = None
+    while itemIndex < len(items):
+        item = items[itemIndex]
+        if valueOverDistance(item) > bestValue:
+            bestValue = valueOverDistance(item)
+            bestItem = item
+        itemIndex += 1
+    return bestItem
+
+def valueOverDistance(item):
+    value = item.value / hero.distanceTo(item)
+    return value
+
+while True:
+    # Move to the nearest coin.
+    # Use move instead of moveXY so you can command constantly.
+    items = hero.findItems()
+    item = findbestcoins(items)
+    if item:
+        hero.move(item.pos)
+    
+    # If you have funds for a soldier, summon one.
+    if hero.gold >= hero.costOf("soldier"):
+        hero.summon("soldier")
+        
+    enemy = hero.findNearest(hero.findEnemies())
+    if enemy:
+        soldiers = hero.findFriends()
+        soldierIndex = 0
+        soldier = soldiers[soldierIndex]
+        # Loop over all your soldiers and order them to attack.
+        while soldierIndex < len(soldiers):
+            soldier = soldiers[soldierIndex]
+            # Use the 'attack' command to make your soldiers attack.
+            hero.command(soldier, "attack", enemy)
+            soldierIndex += 1

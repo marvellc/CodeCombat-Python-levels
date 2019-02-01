@@ -1,0 +1,35 @@
+# You only have 20 seconds until the ogre horde arrives!
+# Grab as much gold as you can, then retreat to your base and wall it off!
+jumpto = 0
+def findbestcoins(items):
+    itemIndex = 0
+    bestValue = 0
+    bestItem = None
+    while itemIndex < len(items):
+        item = items[itemIndex]
+        if valueOverDistance(item) > bestValue:
+            bestValue = valueOverDistance(item)
+            bestItem = item
+        itemIndex += 1
+    return bestItem
+
+def valueOverDistance(item):
+    value = item.value / hero.distanceTo(item)
+    return value
+
+while hero.time < 23:
+    # Collect coins
+    items = hero.findItems()
+    item = findbestcoins(items)
+    if item and jumpto == 0:
+        hero.jumpTo(item)
+        jumpto +=1
+    elif hero.time > 20 and jumpto == 1:
+        hero.jumpTo(item)
+        jumpto += 1
+    else:
+        hero.move(item.pos)
+
+while hero.pos.x > 16:
+    hero.moveXY(17,38)
+    hero.buildXY( "fence", 21, 38)

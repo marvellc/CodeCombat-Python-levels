@@ -1,0 +1,56 @@
+# Ogres are trying to take out your reindeer!
+# Keep your archers back while summoning soldiers to attack.
+
+def pickUpCoin():
+    # Collect coins.
+    item = hero.findNearestItem()
+    if item:
+        hero.moveXY(item.pos.x, item.pos.y)
+    pass
+
+def summonTroops():
+    # Summon soldiers if you have the gold.
+    if hero.gold >= hero.costOf("soldier"):
+        hero.summon("soldier")
+    pass
+    
+# This function has an argument named soldier.
+# Arguments are like variables.
+# The value of an argument is determined when the function is called.
+def commandSoldier(soldier):
+    # Soldiers should attack enemies.
+    enemy = hero.findNearestEnemy()
+    if enemy and soldier.health > soldier.maxHealth /2:
+        distance = soldier.distanceTo(enemy)
+        if distance < 15:
+            hero.command(soldier, "attack", enemy)
+    elif soldier.health < soldier.maxHealth /2:
+        hero.command(soldier, "move", {"x": 13,"y":51})
+    pass
+
+# Write a commandArcher function to tell your archers what to do!
+# It should take one argument that will represent the archer passed to the function when it's called.
+# Archers should only attack enemies who are closer than 25 meters, otherwise, stay still.
+def commandArcher(archer):
+    enemy = hero.findNearestEnemy()
+    archerpos = archer.pos
+    if enemy:
+        distance = archer.distanceTo(enemy)
+        if distance < 25:
+            hero.command(archer, "attack", enemy)
+    else:
+        hero.command(archer, "move", archerpos)
+        
+    pass
+while True:
+    pickUpCoin()
+    summonTroops()
+    friends = hero.findFriends()
+    for friend in friends:
+        if friend.type == "soldier":
+            # This friend will be assigned to the variable soldier in commandSoldier
+            commandSoldier(friend)
+        elif friend.type == "archer":
+            # Be sure to command your archers.
+            commandArcher(friend)
+            pass
